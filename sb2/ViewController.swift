@@ -10,6 +10,7 @@ import UIKit
 import SwiftSoup
 import AVKit
 
+
 class ViewController: UIViewController {
 
     @IBOutlet weak var chkBtnSeg: UISegmentedControl!
@@ -39,7 +40,7 @@ class ViewController: UIViewController {
     var IsCorrect: Bool = true
     var isStartOver: Bool = false
     var wrongAlready: Bool = false
-    
+    var markedWordForSMS = [""]
     let congratulateArray = ["Great Job", "Excellent", "Way to go", "Alright", "Right on", "Correct", "Well done", "Awesome"]
     let retryArray = ["Try again","Oooops"]
     let allWords = WordBank()
@@ -338,9 +339,12 @@ class ViewController: UIViewController {
     }
     func trackMarkedQuestions(){
         let trackedWord = allWords.list[questionNumber].spellWord
+        markedWordForSMS.append(trackedWord)
+        print(markedWordForSMS)
         
         markedQuestions.append(Word(word: trackedWord))
         markedQuestionsCount += 1
+
     }
     func enableAllBtn(){
         chkBtnSeg.setEnabled(true, forSegmentAt: 0)
