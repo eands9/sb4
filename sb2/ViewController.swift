@@ -9,9 +9,9 @@
 import UIKit
 import SwiftSoup
 import AVKit
+import MessageUI
 
-
-class ViewController: UIViewController {
+class ViewController: UIViewController, MFMessageComposeViewControllerDelegate {
 
     @IBOutlet weak var chkBtnSeg: UISegmentedControl!
     @IBOutlet weak var wordInfoSeg: UISegmentedControl!
@@ -240,6 +240,7 @@ class ViewController: UIViewController {
             present(alert, animated: true, completion: nil)
         }
         else {
+            sendSMS()
             isTesting = false
             readMe(myText: "Let us review")
             
@@ -358,6 +359,31 @@ class ViewController: UIViewController {
         wordInfoSeg.setEnabled(true, forSegmentAt: 3)
         wordInfoSeg.setEnabled(true, forSegmentAt: 4)
         wordInfoSeg.setEnabled(true, forSegmentAt: 5)
+    }
+    func sendSMS(){
+        let combinedMarkedWords = markedWordForSMS.joined(separator: ",")
+        let messageVC = MFMessageComposeViewController()
+        
+        messageVC.body = combinedMarkedWords;
+        messageVC.recipients = ["469-910-6366"]
+        messageVC.messageComposeDelegate = self
+        
+        self.present(messageVC, animated: false, completion: nil)
+    }
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        switch (result) {
+        case .cancelled:
+            print("Message was cancelled")
+            dismiss(animated: true, completion: nil)
+        case .failed:
+            print("Message failed")
+            dismiss(animated: true, completion: nil)
+        case .sent:
+            print("Message was sent")
+            dismiss(animated: true, completion: nil)
+        default:
+            break
+        }
     }
 }
 
