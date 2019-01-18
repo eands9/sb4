@@ -361,7 +361,7 @@ class ViewController: UIViewController, MFMessageComposeViewControllerDelegate {
         wordInfoSeg.setEnabled(true, forSegmentAt: 5)
     }
     func sendSMS(){
-        let combinedMarkedWords = markedWordForSMS.joined(separator: ",")
+        let combinedMarkedWords = markedWordForSMS.joined(separator: ", ")
         let messageVC = MFMessageComposeViewController()
         
         messageVC.body = combinedMarkedWords;
