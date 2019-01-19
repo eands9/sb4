@@ -341,7 +341,6 @@ class ViewController: UIViewController, MFMessageComposeViewControllerDelegate {
     func trackMarkedQuestions(){
         let trackedWord = allWords.list[questionNumber].spellWord
         markedWordForSMS.append(trackedWord)
-        print(markedWordForSMS)
         
         markedQuestions.append(Word(word: trackedWord))
         markedQuestionsCount += 1
